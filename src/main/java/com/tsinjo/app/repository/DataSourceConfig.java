@@ -1,4 +1,4 @@
-package com.tsinjo.app.config;
+package com.tsinjo.app.repository;
 
 import javax.sql.DataSource;
 
@@ -9,9 +9,7 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 
 @Configuration
 public class DataSourceConfig {
-
     private Dotenv dotenv = Dotenv.load();
-
     @Bean
     public DataSource dataSource() {
         return DataSourceBuilder.create()
