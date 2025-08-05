@@ -23,25 +23,21 @@ public class PaymentService {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    private boolean verificationStatusProcessed = false;
-
-    @Scheduled(cron = "0 0 6,18 * * *", zone = "Africa/Nairobi")
-    public void apiCall(){
-        if (verificationStatusProcessed){
-            return;
-        }
-    }
+    @Scheduled(fixedDelay = 24 * 60 * 60 * 1000)
     public PaymentVerificationResponse verifyPayment (PaymentVerificationRequest payment) {
         String url = "https://42cwka3n4ifcp7ufheyrpmph240iuaxo.lambda-url.eu-west-3.on.aws/payment";
 
         try {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("x-api-key", apiKey);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.set("x-api-key", apiKey);
 
-        HttpEntity<PaymentVerificationRequest> entity = new HttpEntity<>(payment, headers);
+            HttpEntity<PaymentVerificationRequest> entity = new HttpEntity<>(payment, headers);
 
-        return restTemplate.postForObject(url, entity, PaymentVerificationResponse.class);
+            PaymentVerificationResponse response = restTemplate.postForObject(url, entity, PaymentVerificationResponse.class);
+            response.setVerificationAttemptNb(response.getVerificationAttemptNb() + 1);
+
+            return response;
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }

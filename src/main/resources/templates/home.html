@@ -1,10 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Tsinjo</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          max-width: 600px;
+          margin: auto;
+          padding: 20px;
+        }
+        h1, h2 {
+          text-align: center;
+        }
+        label {
+          display: block;
+          margin-top: 15px;
+          font-weight: bold;
+        }
+        input[type="text"], input[type="email"] {
+          width: 100%;
+          padding: 8px;
+          margin-top: 5px;
+          box-sizing: border-box;
+        }
+        .historique {
+          margin-top: 30px;
+        }
+        .item {
+          border: 1px solid #ccc;
+          padding: 10px;
+          margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
+
+<h1>Tsinjo</h1>
+
+<form>
+    <label for="email">Email :</label>
+    <input type="email" id="email" name="email" placeholder="exemple@email.com" />
+
+    <label for="moyen">Moyen de paiement :</label>
+    <input type="text" id="moyen" name="moyen" placeholder="Carte, Mobile Money..." />
+
+    <label for="reference">Référence de paiement :</label>
+    <input type="text" id="reference" name="reference" placeholder="Ref123456" />
+</form>
+
+<div class="historique">
+    <h2>Historique</h2>
+
+</div>
 
 </body>
 </html>
